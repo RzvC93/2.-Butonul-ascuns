@@ -1,23 +1,56 @@
-function selectButton() {
-    const buttons = document.querySelectorAll("button");  // aici selectam toate butoanele posibile
-    // Prima data trebuie sa selectam butonul/butoanele
-    // putem folosii si metoda asta "document.querySelector("#btn1") dar selectam doar un anumit buton dupa id"
+function setBtn(buttons) {
     const winningBtnIndex = Math.floor(Math.random() * buttons.length);
-    // Math.floor =  rotunjește rezultatul în jos la cel mai apropiat număr întreg.
-    // Math.random = reda un numar rendom intre (0. si 1) si il inmultimcu cu numarul de butoane pe care le avem
-    // acum am obtinut indexul
     const winningBtn = buttons[winningBtnIndex];
-    // Stocăm referința butonului câștigător într-o constantă
-    buttons.forEach((button, index) => {
-         // forEach executa o functie pentru fiecare element din lista
-        button.addEventListener('click', () =>{
-            // adaugam un eveniment de ascultare pe buton in acest caz "click"
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
             if (button === winningBtn) {
-                alert("Felicitari, ai gasit butonul castigator! la indexul " + index + "!");
+                alert("Felicitari, ai gasit butonul castigator!");
             } else {
-                alert("Îmi pare rău, nu acesta este butonul câștigător. Indexul acestui buton este " + index + ".");
+                alert("Îmi pare rău, nu acesta este butonul câștigător.");
             }
         });
     }); 
 }
+
+
+
+function selectButton() {
+    const buttons = document.querySelectorAll(".card button"); 
+    setBtn(buttons); 
+}
+
+
+
+
+function generateButtons() {
+    const noInput = document.getElementById('noInput');
+    const noOfBtn = parseInt(noInput.value);
+
+    if (isNaN(noOfBtn) || noOfBtn <= 0) { 
+        alert("Te rog introdu un număr valid.");
+        return;
+    }
+
+    const existingContainer = document.querySelector('.buttons-container');
+    
+    if (existingContainer) {
+        existingContainer.remove();
+    }
+    const container = document.createElement('div');
+    container.classList.add('buttons-container');
+    
+    for (let i = 0; i < noOfBtn; ++i) {
+        const btn = document.createElement('button');
+        btn.textContent = 'Chance ' + (i + 1);
+        btn.classList.add('btn', 'btn-dark', 'm-2');
+        container.appendChild(btn);
+        
+    }
+    document.body.appendChild(container);
+    const newButtons = document.querySelectorAll('button');
+    setBtn(newButtons);
+    noInput.value = '';
+}
 selectButton();
+document.getElementById('btnGenerate').addEventListener('click', generateButtons);
+
