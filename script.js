@@ -4,9 +4,9 @@ function setBtn(buttons) {
     buttons.forEach((button) => {
         button.addEventListener('click', () => {
             if (button === winningBtn) {
-                alert("Felicitari, ai gasit butonul castigator!");
+                alert("Congratulations, you found the winning button!");
             } else {
-                alert("Îmi pare rău, nu acesta este butonul câștigător.");
+                alert("I'm sorry, this is not the winning button.");
             }
         });
     }); 
@@ -21,7 +21,7 @@ function generateButtons() {
     const noInput = document.getElementById('noInput');
     const noOfBtn = parseInt(noInput.value);
     if (isNaN(noOfBtn) || noOfBtn <= 0) { 
-        alert("Te rog introdu un număr valid.");
+        alert("Please enter a valide number.");
         return;
     }
     const existingContainer = document.querySelector('.buttons-container');
@@ -35,7 +35,6 @@ function generateButtons() {
         btn.textContent = 'Chance ' + (i + 1);
         btn.classList.add('btn', 'btn-dark', 'm-2');
         container.appendChild(btn);
-        
     }
     document.body.appendChild(container);
     const newButtons = document.querySelectorAll('button');
